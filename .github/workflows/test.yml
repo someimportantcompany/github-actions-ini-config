@@ -11,7 +11,7 @@ jobs:
   simple:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: someimportantcompany/github-actions-ini-config@master
         uses: ./
         id: config
@@ -31,7 +31,7 @@ jobs:
   isolation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: someimportantcompany/github-actions-ini-config@master
         uses: ./
         id: config
