@@ -26,7 +26,7 @@ jobs:
         with:
           script: |
             console.log(process.env);
-            console.log(JSON.parse(${{ toJSON(steps.config.outputs) }}));
+            console.log(${{ toJSON(steps.config.outputs) }});
 
   isolation:
     runs-on: ubuntu-latest
@@ -58,4 +58,4 @@ jobs:
         with:
           script: |
             console.log(process.env);
-            console.log(JSON.parse(${{ toJSON(steps.config.outputs) }}));
+            console.log(${{ toJSON(steps.config.outputs) }});
