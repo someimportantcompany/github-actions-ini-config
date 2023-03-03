@@ -21,7 +21,10 @@ jobs:
             [outputs]
             hello2=world2
       - run: env
-      - run: echo ${{ toJSON(steps.config.outputs) }}
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(context);
 
   isolation:
     runs-on: ubuntu-latest
@@ -51,4 +54,7 @@ jobs:
             hello=NOPE
             hello2=NOPE
       - run: env
-      - run: echo ${{ toJSON(steps.config.outputs) }}
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(context);
