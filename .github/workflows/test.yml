@@ -43,15 +43,15 @@ jobs:
             [outputs]
             hello2=world2
 
-            [(${{ startsWith(github.ref, "refs/heads/") }}).env]
+            [(${{ startsWith(github.ref, 'refs/heads/') }}).env]
             hello2=world
-            [(${{ startsWith(github.ref, "refs/heads/") }}).outputs]
+            [(${{ startsWith(github.ref, 'refs/heads/') }}).outputs]
             hello=world
 
-            [(${{ startsWith(github.ref, "something/else/") }}).env]
+            [(${{ startsWith(github.ref, 'something/else/') }}).env]
             hello=NOPE
             hello2=NOPE
-            [(${{ startsWith(github.ref, "something/else/") }}).outputs]
+            [(${{ startsWith(github.ref, 'something/else/') }}).outputs]
             hello=NOPE
             hello2=NOPE
       - uses: actions/github-script@v6
