@@ -6,6 +6,8 @@ on:
         - index.dist.js
   # Or manually, upon request
   workflow_dispatch:
+env:
+  ACTIONS_RUNNER_DEBUG: true
 jobs:
 
   simple:
