@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: env
       - name: someimportantcompany/github-actions-ini-config@master
         uses: ./
         id: config
@@ -23,17 +22,16 @@ jobs:
             hello=world
             [outputs]
             hello2=world2
-      - run: env
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log(context);
+            console.log(process.env);
+            console.log(JSON.parse(${{ toJSON(steps.config.outputs) }}));
 
   isolation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: env
       - name: someimportantcompany/github-actions-ini-config@master
         uses: ./
         id: config
@@ -56,8 +54,8 @@ jobs:
             [(${ startsWith(github.ref, "something/else/") }).outputs]
             hello=NOPE
             hello2=NOPE
-      - run: env
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log(context);
+            console.log(process.env);
+            console.log(JSON.parse(${{ toJSON(steps.config.outputs) }}));
