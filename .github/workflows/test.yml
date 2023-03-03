@@ -1,0 +1,54 @@
+name: Test
+on:
+  push:
+    paths:
+      - index.dist.js
+jobs:
+
+  simple:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: env
+      - name: someimportantcompany/github-actions-ini-config@master
+        uses: ./
+        id: config
+        with:
+          config: |
+            ; Here is a user comment
+            [env]
+            hello=world
+            [outputs]
+            hello2=world2
+      - run: env
+      - run: echo ${{ toJSON(steps.config.outputs) }}
+
+  isolation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: env
+      - name: someimportantcompany/github-actions-ini-config@master
+        uses: ./
+        id: config
+        with:
+          config: |
+            ; Here is a user comment
+            [env]
+            hello=world
+            [outputs]
+            hello2=world2
+
+            [(${ startsWith(github.ref, "refs/heads/") }).env]
+            hello2=world
+            [(${ startsWith(github.ref, "refs/heads/") }).outputs]
+            hello=world
+
+            [(${ startsWith(github.ref, "something/else/") }).env]
+            hello=NOPE
+            hello2=NOPE
+            [(${ startsWith(github.ref, "something/else/") }).outputs]
+            hello=NOPE
+            hello2=NOPE
+      - run: env
+      - run: echo ${{ toJSON(steps.config.outputs) }}

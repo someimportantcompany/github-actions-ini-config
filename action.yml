@@ -1,0 +1,12 @@
+name: ini-config
+description: Parse an ini-style configuration block to easily set env or outputs.
+branding:
+  icon: paperclip
+  color: green
+runs:
+  using: node16
+  main: ./index.dist.js
+inputs:
+  config:
+    description: ini-style configuration block
+    required: true

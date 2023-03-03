@@ -1,0 +1,62 @@
+{
+  "name": "@someimportantcompany/github-actions-ini-config",
+  "version": "1.0.0",
+  "description": "Parse an ini-style configuration block to easily set env or outputs.",
+  "private": true,
+  "scripts": {
+    "build": "esbuild index.js --outfile=index.dist.js --bundle --minify --platform=node --target=node16",
+    "lint": "eslint .",
+    "test": "nyc mocha",
+    "test:mocha": "mocha",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags"
+  },
+  "author": "jdrydn <james@jdrydn.com> (https://jdrydn.com)",
+  "license": "MIT",
+  "repository": "https://github.com/someimportantcompany/github-actions-ini-config",
+  "bugs": "https://github.com/someimportantcompany/github-actions-ini-config/issues",
+  "keywords": [
+    "github",
+    "actions",
+    "ini",
+    "config"
+  ],
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "ini": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.14.1",
+    "esbuild": "^0.17.10",
+    "eslint": "^8.34.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "rewire": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
+  "mocha": {
+    "exit": true,
+    "reporter": [
+      "spec"
+    ],
+    "spec": [
+      "./*.test.js"
+    ],
+    "ui": "bdd"
+  },
+  "nyc": {
+    "exclude": [
+      "*.test.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  }
+}
