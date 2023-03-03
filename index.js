@@ -15,7 +15,10 @@ module.exports = function run() {
 
     const { env, outputs } = Object.entries(config).reduce((final, [ key, opts ]) => {
       if (key === '(true)') {
-        Object.assign(final, opts);
+        Object.assign(final, {
+          env: { ...final.env, ...opts.env },
+          outputs: { ...final.outputs, ...opts.outputs },
+        });
       }
       return final;
     }, {
